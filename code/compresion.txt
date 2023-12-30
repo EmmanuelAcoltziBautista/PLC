@@ -1,1 +1,0 @@
-jar cvfm PLC.jar manifest.mf Instalacion.class Cargando.class Robot.class PINTAR.class PLC(Sources)/1.png icono.png

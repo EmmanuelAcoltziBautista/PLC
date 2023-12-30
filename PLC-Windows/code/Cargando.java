@@ -15,7 +15,7 @@ private JLabel label1,label2;
 int i;
 String direccion=System.getProperty("user.home");
 public Cargando(){
-    System.out.println(direccion+"\\PLC(Sources)");
+    System.out.println(direccion+"/PLC(Sources)");
 
     setLayout(null);
     setTitle("Loading...");
@@ -39,7 +39,7 @@ add(label2);
 
 
 
-    ImageIcon Im=new ImageIcon(direccion+"/PLC(Sources)/1.png");
+    ImageIcon Im=new ImageIcon(direccion+"/PLC(Sources)/1.PNG");
     Icon I=new ImageIcon(Im.getImage().getScaledInstance(label2.getWidth(),label2.getHeight(),Image.SCALE_DEFAULT));
     label2.setIcon(I);
 
@@ -57,7 +57,7 @@ G.fillRect(21,101,i,39);
 i++;
 //si completo la animacion redirijeme
 if(i==399){
-      Robot P=new Robot();
+      Robot P=new Robot("");
     P.setBounds(0,0,700,700);
     P.setVisible(true);
     P.setLocationRelativeTo(null);

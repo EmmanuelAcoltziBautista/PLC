@@ -1,0 +1,1 @@
+jar cvfm PLC.jar MANIFEST.MF Instalacion.class Licencia.class Cargando.class Robot.class PINTAR.class PLC(Sources)/1.PNG icono.png PLC(Sources)/LICENSE.txt

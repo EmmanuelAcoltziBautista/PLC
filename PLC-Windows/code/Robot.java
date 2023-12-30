@@ -11,7 +11,7 @@ public class Robot extends JFrame implements ActionListener{
 	private JTextField TEXTO1,TEXTO2;
 	private JTextArea AREA;
 	private JScrollPane DESPLAZAR;
-	private JButton BOTON1,BOTON2,BOTON3,BOTON4;
+	private JButton BOTON1,BOTON2,BOTON3,BOTON4,BOTON5;
 	private JPanel PANEL;
 	private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9,label10;
 	private JMenuBar BAR;
@@ -23,7 +23,8 @@ public class Robot extends JFrame implements ActionListener{
 //escala
 	public static int escala=10;
 
-	public Robot(){
+	public Robot(String texto){
+	this.texto=texto;
 	System.out.println(direccion+"/");
 	setLayout(null);
 //para la optimizacion
@@ -55,12 +56,12 @@ public class Robot extends JFrame implements ActionListener{
 	item2.addActionListener(this);
 	MENU1.add(item2);
 
-/*	item5=new JMenuItem("Nuevo");
+	item5=new JMenuItem("Nuevo");
 	item5.setForeground(new Color(255,255,255));
 	item5.setBackground(new Color(155,155,255));
 	item5.addActionListener(this);
 	MENU1.add(item5);
-*/
+
 
 	MENU2=new JMenu("About");
 	MENU2.setForeground(new Color(255,255,255));
@@ -93,7 +94,7 @@ public class Robot extends JFrame implements ActionListener{
 	PANEL.setBounds(10,40,400,400);
 	add(PANEL);
 
-	AREA=new JTextArea();
+	AREA=new JTextArea(texto);
 	AREA.setBackground(new Color(155,155,255));
 	AREA.setForeground(new Color(255,255,255));
 	AREA.setFont(new Font("Andale Mono",1,20));
@@ -109,13 +110,21 @@ public class Robot extends JFrame implements ActionListener{
 	BOTON1.addActionListener(this);
 	add(BOTON1);
 
-	BOTON4=new JButton("Reset");
+	BOTON4=new JButton("Reset All");
 	BOTON4.setBackground(new Color(155,155,255));
 	BOTON4.setForeground(new Color(255,255,255));
 	BOTON4.setFont(new Font("Andale Mono",1,20));
 	BOTON4.setBounds(420,100,200,30);
 	BOTON4.addActionListener(this);
 	add(BOTON4);
+
+	BOTON5=new JButton("Reset Panel");
+	BOTON5.setBackground(new Color(155,155,255));
+	BOTON5.setForeground(new Color(255,255,255));
+	BOTON5.setFont(new Font("Andale Mono",1,20));
+	BOTON5.setBounds(420,130,200,30);
+	BOTON5.addActionListener(this);
+	add(BOTON5);
 
 
 	label10=new JLabel("Scale:");
@@ -179,7 +188,7 @@ public class Robot extends JFrame implements ActionListener{
 
 //agrego el fondo del programa
 
-	ImageIcon im=new ImageIcon(direccion+"\\PLC(Sources)\\1.png");
+	ImageIcon im=new ImageIcon(direccion+"/PLC(Sources)/1.PNG");
 	Icon i=new ImageIcon(im.getImage().getScaledInstance(label4.getWidth(),label4.getHeight(),Image.SCALE_DEFAULT));
 	label4.setIcon(i);
 
@@ -211,7 +220,7 @@ public void actionPerformed(ActionEvent A){
 	}
 	if(A.getSource()==BOTON4){
 	dispose();
-	Robot R=new Robot();
+	Robot R=new Robot("");
 	R.setBounds(0,0,700,700);
 	R.setLocationRelativeTo(null);
 	R.setVisible(true);
@@ -222,6 +231,33 @@ public void actionPerformed(ActionEvent A){
 	P.ancho=200;//le digo que resetee todos los valores
 	P.alto=200;
 	}
+
+
+
+
+
+	if(A.getSource()==BOTON5){
+	String texto1=AREA.getText();
+//	System.out.println("boton5");
+	dispose();
+	Robot R=new Robot(texto1);
+	R.setBounds(0,0,700,700);
+	R.setLocationRelativeTo(null);
+	R.setVisible(true);
+	R.setResizable(false);
+	this.setVisible(false);	
+	PINTAR P=new PINTAR(PANEL,"",escala);//envio valores
+
+	P.ancho=200;//le digo que resetee todos los valores
+	P.alto=200;
+	}
+
+
+
+
+//item1 guarda archivo
+
+
 	if(A.getSource()==item1){
 //obtengo el codigo
 	String Texto=AREA.getText();
@@ -254,6 +290,8 @@ public void actionPerformed(ActionEvent A){
 	}
 
 
+//item2 abro un archivo
+
 
 	if(A.getSource()==item2){
 //creo un archivo
@@ -275,7 +313,7 @@ public void actionPerformed(ActionEvent A){
 //mientas tenga lineas que las lea siempre y cuando siga teniendo texto
 	while((bfReader=bf.readLine())!=null){
 //lo agrego
-	temp=temp+bfReader;
+	temp=temp+bfReader+"\n";
 	}
 //asigno
 	texto=temp;
@@ -297,7 +335,7 @@ public void actionPerformed(ActionEvent A){
 
 
 	if(A.getSource()==item5){
-	Robot R=new Robot();
+	Robot R=new Robot("");
 	R.setBounds(0,0,700,600);
 	R.setLocationRelativeTo(null);
 	R.setVisible(true);
@@ -308,7 +346,7 @@ public void actionPerformed(ActionEvent A){
 }
 public static void main(String args[]){
 //lo que establece como va a estar el programa
-	Robot R=new Robot();
+	Robot R=new Robot("");
 	R.setBounds(0,0,700,700);
 	R.setLocationRelativeTo(null);
 	R.setVisible(true);
